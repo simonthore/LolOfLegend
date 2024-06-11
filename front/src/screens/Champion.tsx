@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ChampionCard from "../components/championCard";
+import ChampionCard from "../components/ChampionCard";
 
 interface Champion {
     name: string;
