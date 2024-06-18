@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Champion from "./screens/Champion";
 import "./App.css";
+import Lfl from "./screens/Lfl";
 function App() {
     return (
         <Router>
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Champion" element={<Champion />} />
+                <Route path="Lfl" element={<Lfl/>} />
             </Routes>
         </Router>
     );
