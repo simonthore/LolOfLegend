@@ -10,9 +10,6 @@ export const schema = {
   POSTGRES_PASSWORD: String,
   POSTGRES_USER: String,
   POSTGRES_DB: String,
-  REACT_APP_CITIES_API_KEY: String,
-  REACT_APP_PHOTOS_API_KEY: String,
-  REACT_APP_POI_API_KEY: String,
   DB_HOST: { type: String, optional: true },
 };
 

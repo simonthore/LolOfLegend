@@ -26,7 +26,6 @@ export class TeamResolver {
     @Arg("name") name: string,
     @Arg("description", { nullable: true }) description?: string
   ): Promise<Team | null> {
-    // Utiliser { where: { id } } pour spécifier l'identification par l'ID
     let teamToUpdate = await this.teamRepository.findOne({ where: { id } });
 
     if (!teamToUpdate) {
