@@ -1,26 +1,38 @@
-import 'reflect-metadata';
-import { ApolloServer } from 'apollo-server';
-import { buildSchema } from 'type-graphql';
-import { TeamResolver } from './resolver/TeamResolver';
-import dataSource from './db';
+import "reflect-metadata"; // Nécessaire pour TypeORM
+import { createConnection } from "typeorm";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { TeamResolver } from "./resolver/TeamResolver"; // Exemple de résolveur pour les utilisateurs
+import { AppDataSource } from "./data-source"; // Fichier de configuration de la base de données
 
-async function startServer() {
-  try {
-    await dataSource.initialize();
-    console.log('Data Source has been initialized!');
+(async () => {
+  // Initialisation de la connexion à la base de données type-graphqlavec TypeORM
+  await createConnection(AppDataSource);
 
-    const schema = await buildSchema({
-      resolvers: [TeamResolver],
-    });
+  // Initialisation d'Express
+  const app = express();
 
-    const server = new ApolloServer({ schema });
+  // Initialisation d'Apollo Server avec votre schéma GraphQL
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [TeamResolver], // Ajoutez d'autres résolveurs au besoin
+      validate: false,
+    }),
+  });
+  await apolloServer.start();
+  // Middleware pour connecter Apollo Server à Express
+  apolloServer.applyMiddleware({ app, path: "/graphql" });
 
-    server.listen({ port: 4000 }, () =>
-      console.log('Server is running on http://localhost:4000/graphql')
-    );
-  } catch (error) {
-    console.error('Error during Data Source initialization:', error);
-  }
-}
-
-startServer();
+  const port = 4000;
+  app.listen(port, () => {
+    console.log(`Server started on http://localhost:${port}/graphql`);
+  }).on('error', (err: any) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is already in use. Trying another port...`);
+      app.listen(port + 1);
+    } else {
+      console.error(err);
+    }
+  });
+})();

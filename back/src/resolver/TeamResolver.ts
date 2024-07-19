@@ -14,9 +14,9 @@ export class TeamResolver {
   @Mutation(() => Team)
   async createTeam(
     @Arg("name") name: string,
-    @Arg("description", { nullable: true }) description?: string
+    // @Arg("description", { nullable: true }) description?: string
   ): Promise<Team> {
-    const newTeam = this.teamRepository.create({ name, description });
+    const newTeam = this.teamRepository.create({ name });
     return await this.teamRepository.save(newTeam);
   }
 
@@ -24,7 +24,7 @@ export class TeamResolver {
   async updateTeam(
     @Arg("id") id: number,
     @Arg("name") name: string,
-    @Arg("description", { nullable: true }) description?: string
+    // @Arg("description", { nullable: true }) description?: string
   ): Promise<Team | null> {
     let teamToUpdate = await this.teamRepository.findOne({ where: { id } });
 
@@ -33,7 +33,7 @@ export class TeamResolver {
     }
 
     teamToUpdate.name = name;
-    teamToUpdate.description = description;
+    // teamToUpdate.description = description;
 
     return await this.teamRepository.save(teamToUpdate);
   }
