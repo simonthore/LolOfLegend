@@ -17,7 +17,7 @@ export default function SummonerProfile() {
     useEffect(() => {
         const fetchSummonerData = async () => {
             if (summonerName) {
-                const url = `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/euw?api_key=${API_KEY}`;
+                const url = `/api/riot/account/v1/accounts/by-riot-id/${summonerName}/euw?api_key=${API_KEY}`;
                 console.log("URL sent to API:", url);
                 try {
                     const response = await axios.get(url);
