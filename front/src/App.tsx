@@ -1,10 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
-import Navbar from "./components/Navbar";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Champion from "./screens/Champion";
-import "./App.css";
 import Lfl from "./screens/Lfl";
+import SummonerProfile from "./screens/Profile";
+import Navbar from "./components/Navbar";
+import "./App.css";
+
 function App() {
     return (
         <Router>
@@ -12,7 +14,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Champion" element={<Champion />} />
-                <Route path="Lfl" element={<Lfl/>} />
+                <Route path="/summoner/:summonerName" element={<SummonerProfile />} />
+                <Route path="/Lfl" element={<Lfl />} />
             </Routes>
         </Router>
     );

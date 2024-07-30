@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import magnifyingGlass from "../assets/magnifying.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const [searchInput, setSearchInput] = useState("");
+    const navigate = useNavigate();
 
     function handleChange(event) {
         setSearchInput(event.target.value);
+    }
+
+    function handleSearch() {
+        if (searchInput) {
+            navigate(`/summoner/${searchInput}`);
+            console.log('Navigating to:', `/summoner/${searchInput}`);
+        }
     }
 
     return (
@@ -33,12 +42,9 @@ export default function Home() {
                     onChange={handleChange}
                     placeholder="Nom du joueur"
                 />
-                <div className="button-container">
+                <div className="button-container" onClick={handleSearch}>
                     <button className="button-search">
                         <img src={magnifyingGlass} alt="magnifyingGlass" />
-                        {/* onChange ={(e)  =>{
-                            setSearchPlayer(e.target.value)
-                        }} */}
                     </button>
                 </div>
             </div>
