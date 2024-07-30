@@ -1,8 +1,119 @@
+.general{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.search-area{
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: #fff;
+    width: 500px;
+    border: 2px solid black;
+
+}
+
+.main-search{
+    flex: 1;
+    height: 50px;
+    border: none;
+    padding-left: 20px;
+    text-align: center;
+    outline: none;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+
+
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(213, 213, 213, 0.443);
+    height: 100%;
+    width: 10%;
+}
+
+.button-search {
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 50px;
+}
+
+.button-search img {
+    width: 24px;
+    height: 24px;
+}
+
 h1{
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0 1rem;
     padding: 2rem;
     transition: color 0.3s ease;
-    color: red;
+    color: whitesmoke;
+}
+
+nav {
+    margin-top: 0;
+}
+
+nav ul.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul.menu > li {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+nav ul.menu > li > a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    display: block;
+}
+
+nav ul.menu > li:hover .sous,
+nav ul.menu > li:focus-within .sous {
+    display: block;
+}
+
+.deroulant .sous {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 150px;
+    padding: 0;
+    border-radius: 0 0 50px 50px;
+}
+
+.deroulant .sous li {
+    display: block;
+    padding: 10px;
+}
+
+.deroulant .sous li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.deroulant .sous li:hover {
+    background-color: #f1f1f1;
 }

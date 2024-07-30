@@ -9,7 +9,6 @@ function App() {
     return (
         <Router>
             <Navbar />
-            {/* test */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Champion" element={<Champion />} />
