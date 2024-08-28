@@ -46,6 +46,8 @@ export default function SummonerProfile() {
         fetchSummonerData();
     }, [summonerName]);
 
+    
+
     return (
         <div>
             <h1>Summoner Profile</h1>
