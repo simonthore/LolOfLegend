@@ -8,8 +8,8 @@ export default defineConfig({
       '/api': {
         target: 'https://europe.api.riotgames.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  }
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });

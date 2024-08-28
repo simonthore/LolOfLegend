@@ -6,18 +6,20 @@ interface Summoner {
     name: string;
     level: number;
     puuid: string;
+    tagLine: string;
 }
 
 export default function SummonerProfile() {
-    const { summonerName } = useParams();
+    const { summonerName, region = 'EUW' } = useParams();
     const [summonerData, setSummonerData] = useState<Summoner | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const API_KEY = "RGAPI-6ca18b02-eedc-4396-b22c-014cd3a3396d";
+
+    const API_BASE_URL = 'http://localhost:4000'; // Base URL for your backend
 
     useEffect(() => {
         const fetchSummonerData = async () => {
             if (summonerName) {
-                const url = `/api/riot/account/v1/accounts/by-riot-id/${summonerName}/euw?api_key=${API_KEY}`;
+                const url = `${API_BASE_URL}/api/summoner/${summonerName}/${region}`;
                 console.log("URL sent to API:", url);
                 try {
                     const response = await axios.get(url);
@@ -25,8 +27,9 @@ export default function SummonerProfile() {
                     if (data) {
                         const summoner: Summoner = {
                             name: data.gameName,
-                            level: data.summonerLevel,
+                            level: 0, // Vous pouvez ajouter plus de données si disponible
                             puuid: data.puuid,
+                            tagLine: data.tagLine,
                         };
                         setSummonerData(summoner);
                         setError(null);
@@ -34,6 +37,7 @@ export default function SummonerProfile() {
                     } else {
                         console.error("Summoner data not found.");
                         setSummonerData(null);
+                        setError("Summoner data not found.");
                     }
                 } catch (error) {
                     console.error("An error occurred while fetching the summoner data:", error);
@@ -44,20 +48,20 @@ export default function SummonerProfile() {
         };
 
         fetchSummonerData();
-    }, [summonerName]);
-
-    
+    }, [summonerName, region]);
 
     return (
         <div>
             <h1>Summoner Profile</h1>
-            {error && <p>{error}</p>}
-            {summonerData && (
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {summonerData ? (
                 <div>
                     <h2>{summonerData.name}</h2>
-                    <p>Level: {summonerData.level}</p>
                     <p>PUUID: {summonerData.puuid}</p>
+                    <p>Tag Line: {summonerData.tagLine}</p>
                 </div>
+            ) : (
+                !error && <p>Loading...</p>
             )}
         </div>
     );

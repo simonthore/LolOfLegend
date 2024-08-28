@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Champion" element={<Champion />} />
-                <Route path="/summoner/:summonerName" element={<SummonerProfile />} />
+                <Route path="/summoner/:summonerName/:region" element={<SummonerProfile />} />
                 <Route path="/Lfl" element={<Lfl />} />
             </Routes>
         </Router>
