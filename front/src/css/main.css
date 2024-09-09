@@ -1,14 +1,6 @@
 @import "./screens/Home.css";
 @import "./components/Navbar.css";
+@import "./screens/Profile.css";
+@import "./screens/Champions.css"
 
 
-.main-input {
-    /* Styles de base pour les inputs */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 20px;
-    margin: 10px;
-    height: 30px;
-    width: 88%;
-}

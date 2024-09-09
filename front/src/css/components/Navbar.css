@@ -3,7 +3,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #333;
     padding: 1rem;
 }
 
@@ -18,4 +17,7 @@
 .container a:hover {
     color: #fff;
     border-radius: 5px;
+}
+.container:hover {
+    background-color: #DED97F;
 }

@@ -1,6 +1,15 @@
 @import "./css/main.css";
 
+
 body {
-    margin-top: 60px; 
+    background-image: url('./assets/teemo.jpeg') ;
   /* Ajustez la valeur en fonction de la hauteur de votre barre de navigation */
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+

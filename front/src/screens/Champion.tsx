@@ -50,6 +50,13 @@ export default function Champion() {
         setSearchInput(event.target.value);
     };
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            handleSearch();
+        }
+    };
+
+
     return (
         <div>
             <h1>LolOfLegend</h1>
@@ -57,6 +64,7 @@ export default function Champion() {
                 type="text"
                 value={searchInput}
                 onChange={handleChange}
+                onKeyUp={handleKeyPress}
                 placeholder="Rechercher un champion..."
             />
             <button onClick={handleSearch}>Rechercher</button>

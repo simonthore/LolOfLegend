@@ -1,17 +1,22 @@
-import "reflect-metadata"; // Nécessaire pour TypeORM
+import "reflect-metadata";
 import { createConnection } from "typeorm";
 import express from "express";
+import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { TeamResolver } from "./resolver/TeamResolver"; // Exemple de résolveur pour les utilisateurs
-import { AppDataSource } from "./data-source"; // Fichier de configuration de la base de données
+import { TeamResolver } from "./resolver/TeamResolver";
+import { AppDataSource } from "./data-source";
+import axios from "axios";
 
 (async () => {
-  // Initialisation de la connexion à la base de données type-graphqlavec TypeORM
+  // Initialisation de la connexion à la base de données avec TypeORM
   await createConnection(AppDataSource);
 
   // Initialisation d'Express
   const app = express();
+
+  // Utilisation du middleware CORS
+  app.use(cors());
 
   // Initialisation d'Apollo Server avec votre schéma GraphQL
   const apolloServer = new ApolloServer({
@@ -21,8 +26,21 @@ import { AppDataSource } from "./data-source"; // Fichier de configuration de la
     }),
   });
   await apolloServer.start();
+
   // Middleware pour connecter Apollo Server à Express
   apolloServer.applyMiddleware({ app, path: "/graphql" });
+
+  // Définir un point de terminaison pour l'API
+  app.get('/api/summoner/:summonerName/:region', async (req, res) => {
+    const { summonerName, region } = req.params;
+    const API_KEY = 'RGAPI-b506622c-ca6e-41b7-82a2-c628e831645c'; // Remplacez avec votre clé API
+    try {
+      const response = await axios.get(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/${region}?api_key=${API_KEY}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).send('Erreur lors de la récupération des données');
+    }
+  });
 
   const port = 4000;
   app.listen(port, () => {

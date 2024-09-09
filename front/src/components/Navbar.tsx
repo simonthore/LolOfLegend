@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const Navbar = () => {
     return (
         <div className="container">
@@ -10,7 +11,8 @@ const Navbar = () => {
             <Link to="/Champion">Champion</Link>
         {/* une page avec les stats de la lfl du split en cours : match à venir, match passé avec resultat et bouton no spoil qui masque les resultats  */}
         <Link to="/Lfl">LFL</Link>
-
+        <Link to="/profile">Profile</Link>
+        
         </div>
     );
 };
