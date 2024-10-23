@@ -17,7 +17,6 @@ export default function SummonerProfile() {
     const { summonerName, region = 'EUW' } = useParams();
     const [summonerData, setSummonerData] = useState<Summoner | null>(null);
     const [error, setError] = useState<string | null>(null);
-
     const API_BASE_URL = 'http://localhost:4000'; // Base URL for your backend
     const RIOT_API_KEY = import.meta.env.VITE_RIOT_API_KEY;
 
@@ -27,10 +26,15 @@ export default function SummonerProfile() {
                 try {
                     // Requête initiale pour récupérer le puuid
                     const initialUrl = `${API_BASE_URL}/api/summoner/${summonerName}/${region}`;
-                    console.log(initialUrl, 'initialUrl');
+                    console.log(API_BASE_URL, 'api');
+                    console.log(summonerName, "name");
+                    console.log(region, "region");
+                    console.log(summonerData, "summonerData");
+                    
                     
                     const initialResponse = await axios.get(initialUrl);
                     const initialData = initialResponse.data;
+                    
 
                     if (initialData) {
                         const puuid = initialData.puuid;
@@ -44,15 +48,20 @@ export default function SummonerProfile() {
                         const summonerLeagueResponse = await axios.get(summonerLeagueUrl);
                         console.log(summonerLeagueResponse.data , 'summonerLeagueResponse');
 
+                        
+
                         if (summonerLeagueResponse.data.length > 0) {
-                            summonerData.tierSolo = summonerLeagueResponse.data[0].tier;
-                            summonerData.rankSolo = summonerLeagueResponse.data[0].rank;
-                            summonerData.tierFlex = summonerLeagueResponse.data[2].tier;
-                            summonerData.rankFlex = summonerLeagueResponse.data[2].rank;
+                            summonerData.tierSolo = summonerLeagueResponse.data[1].tier;
+                            summonerData.rankSolo = summonerLeagueResponse.data[1].rank;
+                            summonerData.tierFlex = summonerLeagueResponse.data[0].tier;
+                            summonerData.rankFlex = summonerLeagueResponse.data[0].rank;
+                        console.log("nop");
                         } 
                         else {
                             summonerData.tier = 'UNRANKED';
                             summonerData.rank = '';
+                        console.log("still nop");
+
                         }
                         
                        

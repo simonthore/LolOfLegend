@@ -33,7 +33,7 @@ import axios from "axios";
   // Définir un point de terminaison pour l'API
   app.get('/api/summoner/:summonerName/:region', async (req, res) => {
     const { summonerName, region } = req.params;
-    const API_KEY = 'RGAPI-b506622c-ca6e-41b7-82a2-c628e831645c'; // Remplacez avec votre clé API
+    const API_KEY = 'RGAPI-c61f5376-fbdb-4649-9d57-632a2f79dc4a'; // Remplacez avec votre clé API
     try {
       const response = await axios.get(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/${region}?api_key=${API_KEY}`);
       res.json(response.data);
@@ -50,6 +50,8 @@ import axios from "axios";
       console.log(`Port ${port} is already in use. Trying another port...`);
       app.listen(port + 1);
     } else {
+      console.log('An error occurred:', err);
+      
       console.error(err);
     }
   });
